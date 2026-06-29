@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- tela / lid -->
+  <rect x="6" y="5" width="20" height="14" rx="1.8" fill="#1f2937" />
+  <rect x="7.6" y="6.6" width="16.8" height="10.8" rx="0.8" fill="#3b82f6" />
+  <!-- base / teclado -->
+  <path d="M3 20h26l2 6H1z" fill="#374151" />
+  <!-- entalhe frontal -->
+  <rect x="13.3" y="20.6" width="5.4" height="1.5" rx="0.75" fill="#1f2937" />
+</svg>
