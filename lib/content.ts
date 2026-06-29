@@ -9,7 +9,7 @@ import matter from 'gray-matter'
  * conteúdo (arquivos .mdx em /content). A UI (Painel, badges) consome apenas
  * as funções abaixo e os tipos `PageInfo`. No futuro, para editar anotações
  * pelo navegador, basta reimplementar estas funções lendo de um banco
- * (Neon/Postgres ou Pocketbase) — sem tocar nos componentes nem nas páginas.
+ * (Neon/Postgres ou Pocketbase), sem tocar nos componentes nem nas páginas.
  */
 
 const CONTENT_DIR = path.join(process.cwd(), 'content')

@@ -4,40 +4,214 @@ status: Estudando
 codigo: "11772"
 cargaHoraria: 72h
 semestre: 3
-tags: [faculdade, 3-semestre]
+tags: [faculdade, 3-semestre, Node.js, React]
 gerado: auto
+fonte: materiais de aula
 ---
 
 # Programação I
 
-> 📘 3º semestre · Código 11772 · 72h
+> 3º semestre · Código 11772 · 72h
 
-<Callout type="info" title="Visão geral preliminar">
-Resumo curto e **preliminar** só para situar o tema. Vou **substituir e
-enriquecer** este conteúdo pelos materiais reais dos professores (ver
-`materiais-fonte/programacao-i/`). Não desenvolvido a fundo de propósito,
-para não competir com o material da disciplina.
+<Callout type="info" title="Resumo gerado a partir dos materiais de aula">
+Estas anotações foram organizadas automaticamente a partir dos slides da
+disciplina. Servem como base de estudo e índice do conteúdo; revisar e
+complementar com as minhas próprias notas e com o projeto feito em aula.
 </Callout>
 
 ## Resumo da matéria
 
-Programação I avança da lógica básica para a **programação orientada a objetos**
-aplicada, normalmente em uma linguagem como Java, C# ou Python. Costuma cobrir
-classes e objetos, atributos e métodos, encapsulamento, herança e polimorfismo,
-tratamento de exceções, coleções e manipulação de arquivos, consolidando a
-construção de programas maiores e mais organizados.
-
-O foco é transformar os conceitos de modelagem OO em código funcional, com boas
-práticas de organização e reuso.
+Disciplina prática de **desenvolvimento web full-stack** em JavaScript. No
+back-end: **Node.js** com o framework **Express** para construir uma **API REST**,
+usando o ORM **Sequelize** para conversar com o **PostgreSQL**. No front-end:
+**React** (componentes, rotas, hooks) consumindo essa API via **Axios**. O fio
+condutor é um projeto de **Biblioteca** construído em aula, ligando os dois lados.
 
 ## Anotações
 
-_A preencher a partir dos materiais da disciplina (confirmar a linguagem usada)._
+### 1. Arquitetura de software
+
+- **Monolítico**: aplicação como unidade única indivisível; simples no início,
+  difícil de escalar e manter quando cresce.
+- **3 camadas**: apresentação, lógica e dados separadas; melhora organização e
+  manutenção.
+- Evolução para **APIs RESTful** (comunicação via HTTP e JSON) e
+  **microsserviços** (serviços pequenos e independentes; mais escaláveis e
+  resilientes, ao custo de complexidade de orquestração).
+
+### 2. Back-end com Node.js e Express
+
+Setup: instalar Node LTS, `npm init -y`, adicionar `"type": "module"` no
+`package.json`, criar `server.js`.
+
+```js
+import express from "express";
+const app = express();
+
+app.use(express.json());
+app.get("/", (req, res) => res.json({ mensagem: "Bem vindo" }));
+
+app.listen(4000, () => console.log("Servidor rodando"));
+```
+
+Rotas REST mapeiam os verbos HTTP para o CRUD: `app.get` (listar/buscar),
+`app.post` (inserir), `app.put` (alterar), `app.delete` (excluir).
+
+### 3. Banco de dados com o ORM Sequelize
+
+Dependências: `npm i sequelize pg dotenv`. As credenciais ficam num arquivo
+`.env` (carregado com `dotenv`), e a conexão é centralizada em um `banco.js`.
+
+```js
+// src/banco.js
+import dotenv from "dotenv";
+import { Sequelize } from "sequelize";
+dotenv.config();
+
+const sequelize = new Sequelize(
+  process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD,
+  { dialect: "postgres", host: process.env.DB_HOST,
+    define: { timestamps: false, freezeTableName: true } }
+);
+export default sequelize;
+```
+
+**Models**: cada tabela vira um arquivo em `src/models` com `banco.define`.
+
+```js
+// src/models/categoriaModel.js
+import { Sequelize } from "sequelize";
+import banco from "../banco.js";
+export default banco.define("categoria", {
+  idcategoria: { type: Sequelize.INTEGER, primaryKey: true,
+                 autoIncrement: true, allowNull: false },
+  categoria:   { type: Sequelize.STRING, allowNull: false }
+});
+```
+
+**Controllers**: cada model tem um controller em `src/controllers` com as funções
+do CRUD, usando os métodos do Sequelize (`findAll`, `findByPk`, `create`,
+`update`, `destroy`).
+
+```js
+// src/controllers/categoria.js
+import categoria from "../models/categoriaModel.js";
+
+async function listar(req, res) {
+  const dados = await categoria.findAll();
+  res.json(dados);
+}
+async function inserir(req, res) {
+  await categoria.create({ categoria: req.body.categoria })
+    .then(r => res.json(r)).catch(e => res.status(400).json(e));
+}
+export default { listar, inserir };
+```
+
+### 4. Relacionamentos no Sequelize
+
+Mapeados em um arquivo central (`src/models/relacionamentos.js`) com `hasMany` e
+`belongsTo`; nas models com chave estrangeira usa-se `references`.
+
+```js
+editora.hasMany(livro, { foreignKey: "ideditora" });
+livro.belongsTo(editora, { as: "editora", foreignKey: "ideditora" });
+```
+
+Para trazer dados de tabelas relacionadas em uma consulta (join), usa-se
+`include` no `findAll` (equivale a um `INNER JOIN` no SQL gerado):
+
+```js
+const dados = await emprestimo.findAll({
+  where: { idpessoa: req.params.idpessoa },
+  include: [{ model: livro, attributes: ["titulo"], required: true, as: "livro" }]
+});
+```
+
+Habilitar **CORS** (`npm i cors`, `app.use(cors())`) para o front-end poder
+consumir a API.
+
+### 5. Front-end com React
+
+Criar projeto, instalar **react-bootstrap** para responsividade. **JSX** é a
+extensão de sintaxe parecida com HTML usada para montar componentes.
+Componentes reutilizáveis recebem dados por **props**.
+
+```jsx
+export default function Cabecalho(props) {
+  return (
+    <>
+      <h1>{props.titulo}</h1>
+      <h2>{props.subtitulo}</h2>
+    </>
+  );
+}
+```
+
+### 6. Rotas no React (React Router Dom)
+
+`npm install react-router-dom`. `BrowserRouter`, `Routes`, `Route` (com
+parâmetros via `:param`) e `Link` para navegar sem recarregar a página.
+
+```jsx
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<PaginaHome />} />
+    <Route path="/pagina2/:parametro" element={<Pagina2 />} />
+    <Route path="*" element={<PaginaHome />} />
+  </Routes>
+</BrowserRouter>
+```
+
+### 7. Hooks e integração com o back-end
+
+- **useState**: controla o estado (valores que mudam) dentro do componente.
+- **useEffect**: efeitos colaterais; útil para carregar dados ao montar o
+  componente (array de dependências vazio `[]` roda uma vez).
+- **map()**: percorre um array para renderizar listas (cada item precisa de uma
+  `key`).
+- **Axios**: cliente HTTP para chamar a API (`axios.get/post/put/delete`). A
+  comunicação front/back não é responsabilidade do React em si.
+
+```jsx
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+export default function Lista() {
+  const [dados, setDados] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3000/categoria")
+      .then(r => setDados(r.data))
+      .catch(e => console.log(e));
+  }, []);
+  return (
+    <ul>
+      {dados.map((d, i) => <li key={i}>{d.categoria}</li>)}
+    </ul>
+  );
+}
+```
+
+### 8. Projeto da disciplina: Biblioteca
+
+Aplicação full-stack feita em aula (back Node/Express/Sequelize/Postgres + front
+React). Entidades: categoria, autor, livro, livroautor (relação muitos para
+muitos entre livro e autor), pessoa, editora, funcionário e empréstimo.
+
+## Dúvidas
+
+- _Revisar: configuração de chaves estrangeiras nas models; uso de `include` com
+  múltiplas tabelas; diferença entre useState e useEffect._
 
 ## Projetos relacionados
 
-- _A preencher._
+- Mesma stack do [Sistema de Pet Shop](/projetos/academicos/pet-shop)
+  (Node.js/Express/PostgreSQL/React).
+- O CRUD com Sequelize se apoia nos conceitos de
+  [Banco de Dados I](/faculdade/terceiro-semestre/banco-de-dados-i).
 
 ## Referências
 
-- _A preencher a partir das indicações do professor._
+- Slides da disciplina (Node.js, React I, II e III, Arquitetura de software).
+- Documentação do Sequelize: https://sequelize.org/
+- Documentação do React: https://react.dev/

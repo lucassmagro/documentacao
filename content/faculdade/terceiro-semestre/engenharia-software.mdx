@@ -6,39 +6,179 @@ cargaHoraria: 72h
 semestre: 3
 tags: [faculdade, 3-semestre]
 gerado: auto
+fonte: materiais de aula
 ---
 
 # Engenharia de Software
 
-> 📘 3º semestre · Código 10275 · 72h
+> 3º semestre · Código 10275 · 72h
 
-<Callout type="info" title="Visão geral preliminar">
-Resumo curto e **preliminar** só para situar o tema. Vou **substituir e
-enriquecer** este conteúdo pelos materiais reais dos professores (ver
-`materiais-fonte/engenharia-software/`). Não desenvolvido a fundo de propósito,
-para não competir com o material da disciplina.
+<Callout type="info" title="Resumo gerado a partir dos materiais de aula">
+Estas anotações foram organizadas automaticamente a partir dos slides da
+disciplina (Aulas 1 a 13). As Aulas 14 e 15 eram apenas imagem e não puderam ser
+lidas como texto. Servem como base de estudo e índice do conteúdo; revisar e
+complementar com as minhas próprias notas.
 </Callout>
 
 ## Resumo da matéria
 
-Engenharia de Software trata de **construir software de forma sistemática,
-disciplinada e mensurável** — não só programar, mas planejar, especificar
-requisitos, projetar, testar, manter e gerenciar o processo. Aborda os
-**modelos de processo** (cascata, iterativo, ágil — Scrum, Kanban), a
-**engenharia de requisitos** (levantamento, análise, especificação), o projeto de
-software e qualidade (testes, métricas), e a gestão de projetos.
+Engenharia de Software é a aplicação de princípios científicos e técnicos para
+desenvolver, manter e evoluir software com qualidade, não apenas programar.
+Cobre todo o processo: entender o problema, planejar, construir, testar e
+entregar. A disciplina se organiza em quatro frentes: princípios de análise e
+projeto, projeto de software e gerência de configuração, engenharia de
+requisitos e gerência de projetos (ágil).
 
-A ideia central é lidar com a complexidade e reduzir riscos em sistemas que
-crescem e mudam ao longo do tempo, equilibrando prazo, custo e qualidade.
+Estrutura da área: **princípios** (organizam a área), **processos** (organizam as
+atividades), **métodos** (como realizar as atividades técnicas) e **ferramentas**
+(automatizam). Verificação responde "estamos construindo o produto
+corretamente?"; validação responde "estamos construindo o produto certo?".
 
 ## Anotações
 
-_A preencher a partir dos materiais da disciplina._
+### 1. Modelos de ciclo de vida (processos)
+
+- **Cascata**: sequência linear de fases. Simples e documentado, mas inflexível
+  e com feedback só no fim. Bom para requisitos estáveis e críticos.
+- **Incremental**: entrega em partes funcionais (incrementos); feedback contínuo.
+- **Espiral**: iterativo com forte foco em análise de riscos; para projetos
+  grandes e de alto risco.
+- **Modelo V**: evolução do cascata com cada fase de desenvolvimento ligada a uma
+  fase de teste (ênfase em verificação e validação).
+- **Ágil**: ciclos curtos e iterativos (sprints), foco em colaboração e feedback;
+  frameworks Scrum, Kanban, XP, Lean. **DevOps** integra desenvolvimento e
+  operações com automação e entrega contínua.
+
+### 2. Análise e projeto
+
+- **Análise** investiga o problema ("o que o sistema deve fazer?"); **Projeto**
+  define a solução ("como será construído?").
+- Corrigir um erro na fase de requisitos custa até 100x menos do que em produção
+  (**curva de Boehm**, regra 1:10:100).
+- **Ciclo de vida do projeto**: concepção, planejamento, execução, monitoramento
+  e encerramento.
+- **Stakeholders**: cliente/sponsor, usuário final, gerente de projeto, equipe
+  técnica.
+
+### 3. Princípios fundamentais
+
+- **Abstração**: focar nos aspectos essenciais, ignorando detalhes irrelevantes.
+- **Modularidade**: dividir o sistema em módulos coesos e fracamente acoplados.
+- **Encapsulamento**: ocultar a implementação interna, expondo apenas uma
+  interface pública.
+
+### 4. Escopo e viabilidade
+
+- **Escopo do produto** (o quê: funcionalidades) vs **escopo do projeto** (como:
+  o trabalho para entregar). Cuidado com **scope creep** (crescimento
+  descontrolado do escopo).
+- **Declaração de escopo**: justificativa, entregas, critérios de aceitação e
+  exclusões (o que não será feito).
+- **Análise de viabilidade**: técnica ("é possível construir?"), financeira
+  ("vale a pena?") e operacional ("vão usar?").
+- **EAP / WBS** (Work Breakdown Structure): decomposição hierárquica orientada às
+  entregas; regra dos 100% (o que não está na EAP não faz parte do projeto).
+- **Restrições** (limites impostos: prazo, orçamento, tecnologia, LGPD) vs
+  **premissas** (assumidas como verdadeiras). Premissa que falha vira risco.
+
+### 5. Engenharia de requisitos
+
+Processo de descobrir, analisar, documentar e verificar serviços e restrições do
+sistema (Sommerville). Cinco fases: **elicitação, análise, especificação,
+validação e gestão**.
+
+- **Tipos**: requisitos **funcionais** (o que o sistema faz: ações,
+  comportamentos), **não funcionais** (qualidade: desempenho, segurança,
+  usabilidade, portabilidade) e **de domínio** (regras de negócio).
+- **Bom requisito**: claro, testável, rastreável (ID único), priorizado e
+  realista. Inimigos: ambiguidade, incompletude, inconsistência/conflito e
+  volatilidade.
+- **Técnicas de elicitação**: entrevista, workshops, observação, prototipagem.
+- **Especificação**: ID, descrição, prioridade (MoSCoW: Must/Should/Could/Won't),
+  critérios de aceite, pré/pós-condições, dependências.
+- **Validação**: verificação, validação e testes de aceite (UAT).
+- **Rastreabilidade**: matriz que liga requisito, origem, código e caso de teste
+  (análise de impacto, cobertura, auditoria).
+- **Gestão de mudanças**: solicitação formal, análise de impacto, decisão (comitê
+  CCB) e execução.
+
+### 6. Projeto de software e padrões
+
+- **Arquitetura** (o "mapa da cidade", estrutura macro) vs **Projeto/Design**
+  (como construir cada parte, classes, métodos). Níveis: projeto de arquitetura,
+  detalhado e de interface.
+- **Princípios**: alta coesão (responsabilidade única), baixo acoplamento
+  (módulos independentes), separação de responsabilidades (SoC) e **DRY**
+  (don't repeat yourself).
+- **Padrões de projeto (design patterns)**: soluções reutilizáveis para problemas
+  comuns. Exemplos: **MVC** (Model-View-Controller) e **Factory Method**.
+- Arquiteturas: monolítica, microsserviços e SOA. A arquitetura deve evoluir com
+  o negócio (comece simples, adicione complexidade quando a escala exigir).
+
+### 7. Gerência de configuração (SCM)
+
+Prática de rastrear e controlar alterações no código e nos artefatos. Pilares:
+controle de versão, gestão de build, gestão de ambiente e gestão de release.
+
+- **Git**: repositório, commit, branch, merge/PR.
+- **Estratégias de branching**: **Git Flow** (várias branches longas: main,
+  develop, feature, release, hotfix; para versões fixas) vs **Trunk-Based**
+  (commits diretos na main, branches curtas; exige forte automação de testes;
+  para CI/CD).
+- **Commits semânticos**: `<tipo>(escopo): descrição` (`feat`, `fix`, `docs`,
+  `refactor`), facilitam o histórico e changelogs.
+- **CI (Integração Contínua)**: commit, build, test, merge; descobrir erros cedo.
+  **CD**: Continuous Delivery (deploy pronto, com aprovação manual) e Continuous
+  Deployment (deploy automático). Ferramentas: GitHub Actions, Jenkins, GitLab CI.
+
+### 8. Mapeamento de processos e BPMN
+
+**BPMN** (Business Process Model and Notation, padrão da OMG) é a notação gráfica
+para modelar processos de negócio, fazendo a ponte entre negócio e TI.
+
+- **Eventos**: início (borda fina), intermediário (borda dupla) e fim (borda
+  grossa); tipos none, message, timer, error.
+- **Atividades**: tarefa (unidade atômica) e subprocesso (composto, marcado com
+  "+"). Tipos de tarefa: user, service (automatizada via API), script, manual.
+- **Gateways** (losango): controlam o fluxo (divergência/convergência). Não tomam
+  decisão, apenas roteiam. Exclusivo (XOR): segue exatamente um caminho.
+- Ferramentas: Bizagi Modeler, bpmn.io, Camunda (execução/automação).
+
+### 9. Gerência ágil de projetos
+
+Manifesto Ágil (2001): indivíduos e interações, software funcionando,
+colaboração com o cliente e responder a mudanças. Frameworks: **Scrum** (sprints
+e papéis), **Kanban** (fluxo contínuo, limite de WIP), **XP** (excelência
+técnica) e **SAFe** (escala). Na prática, muitas empresas usam "Scrumban".
+
+- **Hierarquia do trabalho**: tema, iniciativa, épico, história de usuário,
+  tarefa. Épicos são fatiados em histórias (técnica **SPIDR**).
+- **História de usuário**: "Como [persona], quero [ação], para [valor]". Checklist
+  **INVEST** (Independent, Negotiable, Valuable, Estimable, Small, Testable).
+- **DoR** (Definition of Ready) e **DoD** (Definition of Done).
+- **Sprint**: ciclo de tempo fixo (timebox). Eventos do Scrum: Sprint Planning,
+  Daily Scrum, Sprint Review, Sprint Retrospective. Papéis: Product Owner
+  (prioriza o backlog), Scrum Master (remove impedimentos), Dev Team
+  (auto-organizado). Backlogs: Product Backlog e Sprint Backlog.
+- **Estimativas**: Story Points (esforço relativo) em vez de horas; sequência de
+  **Fibonacci** (1,2,3,5,8,13...); **Planning Poker**; T-Shirt Sizing.
+- **Métricas**: Velocity, Lead Time, Cycle Time, Throughput, WIP; **DORA**
+  (deployment frequency, lead time for changes, MTTR, change failure rate);
+  Burndown, Burnup e CFD (Cumulative Flow Diagram). Cuidado com a Lei de Goodhart
+  (métrica que vira meta deixa de ser boa métrica).
+
+## Dúvidas
+
+- _Revisar: diferenças entre os gateways BPMN (XOR, AND, OR); quando escolher Git
+  Flow vs Trunk-Based; técnica SPIDR de fatiamento de épicos._
 
 ## Projetos relacionados
 
-- _A preencher._
+- _A preencher (relacionar com o projeto semestral da disciplina)._
 
 ## Referências
 
-- _A preencher a partir das indicações do professor._
+- Slides da disciplina (Aulas 1 a 13).
+- PRESSMAN, R.; SOMMERVILLE, I. (Engenharia de Software).
+- SUTHERLAND, J.; SCHWABER, K. *Guia do Scrum*. COHN, M. *User Stories Applied*.
+- FORSGREN, N. et al. *Accelerate*.

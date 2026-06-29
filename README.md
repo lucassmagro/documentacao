@@ -1,11 +1,11 @@
-# 📚 Wiki de Estudos
+# Wiki de Estudos
 
 Wiki/documentação pessoal para centralizar estudos (faculdade na UNOESC,
 estudos por conta e projetos). Feita com **Nextra v4** + **Next.js (App
 Router)** + **TypeScript**, com visual inspirado nas docs do Next.js: sidebar à
 esquerda, busca no topo, índice da página à direita e **dark mode por padrão**.
 
-Todo o conteúdo vive em arquivos `.mdx` versionáveis em `content/` — sem banco
+Todo o conteúdo vive em arquivos `.mdx` versionáveis em `content/`, sem banco
 de dados (por enquanto).
 
 ## Rodar localmente
@@ -52,7 +52,7 @@ obsidian-import/           (você cria; ignorado no Git/build) notas do curso.de
 2. Preencha o frontmatter (pelo menos `title` e `status`).
 3. Para que apareça no menu na ordem certa, adicione o slug no `_meta.ts` da
    pasta. Sem isso a página existe, mas entra no fim do menu em ordem alfabética.
-4. Salve — o `npm run dev` recarrega sozinho.
+4. Salve, o `npm run dev` recarrega sozinho.
 
 ### Sobre o `_meta.ts`
 
@@ -79,7 +79,7 @@ automaticamente como um **badge colorido no topo** (via `mdx-components.tsx` →
 - A **[/painel](http://localhost:3000/painel)** lista sozinha tudo que está
   `Estudando` ou `Revisar`.
 - A página **Início** mostra um bloco "Estudando agora".
-- Ambos leem o frontmatter via `lib/content.ts` — não há lista manual a manter.
+- Ambos leem o frontmatter via `lib/content.ts`, não há lista manual a manter.
 
 Para mudar o status de uma página, basta editar o campo `status` no frontmatter.
 
@@ -105,10 +105,10 @@ Blocos de código com crase tripla (` ```ts `) têm syntax highlight nativo (Shi
 Duas pastas são lidas pelo Claude mas **ficam fora do Git e do build**
 (já no `.gitignore`):
 
-- `materiais-fonte/<disciplina>/` — coloque PDFs/slides dos professores do 3º
+- `materiais-fonte/<disciplina>/`, coloque PDFs/slides dos professores do 3º
   semestre. Ao avisar o Claude, ele gera resumo e anotações na página da
   disciplina correspondente.
-- `obsidian-import/` — coloque suas notas `.md` do Obsidian (curso.dev). Ao
+- `obsidian-import/`, coloque suas notas `.md` do Obsidian (curso.dev). Ao
   avisar, o Claude converte wikilinks, embeds, callouts e frontmatter para o
   formato Nextra e importa em **Estudos por conta → curso.dev**, espelhando a
   estrutura de subpastas.
@@ -121,7 +121,7 @@ O conteúdo é **desacoplado da apresentação**:
   A UI (Painel, badges) só consome `getAllPages()` / `getPagesByStatus()` e o
   tipo `PageInfo`.
 - Para futuramente editar anotações pelo navegador, basta reimplementar essas
-  funções lendo de **Neon/Postgres** ou **Pocketbase** — sem tocar nos
+  funções lendo de **Neon/Postgres** ou **Pocketbase**, sem tocar nos
   componentes nem nas páginas.
 - O frontmatter é consistente entre páginas (`title`, `status`, `tags`),
   facilitando a migração para colunas de um banco.
@@ -132,7 +132,7 @@ do Next sem reescrever o conteúdo.
 ## Deploy na Vercel
 
 1. Suba o repositório no GitHub.
-2. Importe na [Vercel](https://vercel.com/new) — ela detecta Next.js sozinha.
+2. Importe na [Vercel](https://vercel.com/new), ela detecta Next.js sozinha.
 3. Sem variáveis de ambiente necessárias. O build (`npm run build`) já roda o
    `postbuild` do Pagefind.
 

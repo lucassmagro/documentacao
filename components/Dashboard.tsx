@@ -6,7 +6,7 @@ import { StatusBadge } from './StatusBadge'
  * Painel: lista automaticamente tudo que está marcado como "Estudando" e
  * "Revisar", lendo o frontmatter das páginas (via lib/content.ts).
  *
- * Server Component — roda no build/servidor e lê os arquivos diretamente.
+ * Server Component, roda no build/servidor e lê os arquivos diretamente.
  */
 function Section({ status, pages }: { status: string; pages: PageInfo[] }) {
   return (

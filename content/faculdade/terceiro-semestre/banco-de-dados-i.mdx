@@ -6,39 +6,239 @@ cargaHoraria: 72h
 semestre: 3
 tags: [faculdade, 3-semestre]
 gerado: auto
+fonte: materiais de aula
 ---
 
 # Banco de Dados I
 
-> 📘 3º semestre · Código 11785 · 72h
+> 3º semestre · Código 11785 · 72h
 
-<Callout type="info" title="Visão geral preliminar">
-Resumo curto e **preliminar** só para situar o tema. Vou **substituir e
-enriquecer** este conteúdo pelos materiais reais dos professores (ver
-`materiais-fonte/banco-de-dados-i/`). Não desenvolvido a fundo de propósito,
-para não competir com o material da disciplina.
+<Callout type="info" title="Resumo gerado a partir dos materiais de aula">
+Estas anotações foram organizadas automaticamente a partir dos slides da
+disciplina (Aulas 1 a 16). Servem como base de estudo e índice do conteúdo;
+revisar e complementar com as minhas próprias notas e exercícios.
 </Callout>
 
 ## Resumo da matéria
 
-Banco de Dados I introduz o **modelo relacional** e como armazenar, organizar e
-consultar dados de forma consistente. Cobre a **modelagem** (modelo
-entidade-relacionamento — entidades, atributos, relacionamentos, cardinalidade),
-a conversão para o **modelo relacional** e a **normalização** (1FN, 2FN, 3FN para
-reduzir redundância), além da linguagem **SQL** (DDL para criar estruturas, DML
-para manipular dados, consultas com `SELECT`, `JOIN`, agregações).
+A disciplina cobre todo o ciclo de um banco de dados relacional: do conceito de
+SGBD e da modelagem conceitual (Modelo Entidade-Relacionamento), passando pela
+conversão para o modelo relacional e pela normalização, até a linguagem SQL
+completa (DDL, DML, consultas) e a programação no banco (funções, gatilhos,
+views, índices). O SGBD usado é o **PostgreSQL** (com pgAdmin/DataGrip), e a
+modelagem é feita no **brModelo**.
 
-É a base prática para os projetos que usam PostgreSQL e para entender integridade,
-chaves primárias/estrangeiras e transações.
+A base teórica é a **álgebra relacional**, que fundamenta o SQL. A sequência de
+estudo vai do abstrato (ER) ao concreto (SQL rodando no Postgres).
 
 ## Anotações
 
-_A preencher a partir dos materiais da disciplina._
+### 1. Conceitos iniciais
+
+- **Dado**: fato do mundo real registrado, com significado implícito num domínio.
+  **Informação**: fato útil extraído dos dados.
+- **Banco de dados**: coleção de dados inter-relacionados e persistentes que
+  representa um subconjunto dos fatos de um domínio.
+- Problemas de guardar dados soltos em arquivos: redundância, falta de
+  padronização e de segurança, dificuldade de manutenção e acesso.
+- **SGBD (Sistema de Gerência de Banco de Dados)**: conjunto de programas que
+  gerencia o acesso e a manutenção dos dados. Funções básicas: métodos de acesso,
+  integridade semântica, segurança, concorrência e independência.
+
+Histórico em ordem: modelo hierárquico e CODASYL (anos 1960), modelo relacional
+de Ted Codd (1970), padronização do SQL (1980s), bancos orientados a objeto,
+NoSQL e Big Data (2000s), NewSQL e bancos poliglotas (2010s).
+
+### 2. Sublinguagens do SQL
+
+- **DDL** (Data Definition Language): define o esquema (`CREATE`, `ALTER`,
+  `DROP`).
+- **DML** (Data Manipulation Language): manipula dados (`INSERT`, `UPDATE`,
+  `DELETE`); o CRUD.
+- **DQL** (Data Query Language): consultas (`SELECT`), considerada por muitos
+  parte do DML.
+- **DTL** (Transaction): `BEGIN`, `COMMIT`, `ROLLBACK`.
+- **DCL** (Control): controle de acesso (`GRANT`, `REVOKE`, `DENY`).
+
+### 3. Níveis de modelagem
+
+- **Conceitual**: descrição abstrata, sem detalhes de implementação,
+  independente de SGBD (linguagens: ER, UML).
+- **Lógico**: dependente do modelo de dados (relacional, OO, XML), com ênfase em
+  eficiência de armazenamento.
+- **Físico**: totalmente dependente do SGBD (índices, gatilhos, ajustes de
+  performance).
+
+Abordagens: **top-down** (requisitos, conceitual, lógico, físico) e **bottom-up**
+(engenharia reversa a partir de dados existentes).
+
+### 4. Modelo Entidade-Relacionamento (ER)
+
+Componentes no diagrama: **retângulos** (entidades), **elipses** (atributos),
+**losangos** (relacionamentos).
+
+- **Entidade normal** existe sozinha; **entidade fraca** depende de outra.
+- **Cardinalidade** (a,b): mínima e máxima de ocorrências de uma entidade em
+  relação a outra.
+- **Atributo identificador**: identifica unicamente cada instância (simples ou
+  composto).
+- Atributos quanto ao valor: **monovalorado/multivalorado**; quanto à
+  obrigatoriedade: **obrigatório/opcional**; **compostos** se dividem em partes.
+
+**ER estendido**: entidade associativa (propriedades de um relacionamento,
+elimina relacionamentos de grau maior que 2), relacionamento n-ário,
+autorrelacionamento (com papéis), relacionamentos múltiplos e
+**generalização/especialização** (análoga à herança em OO).
+
+### 5. Modelo relacional
+
+Definido por E. Codd, baseado na teoria de conjuntos. Conceitos:
+
+- **Domínio**: conjunto de valores válidos para um dado.
+- **Atributo**: item de dado com nome e domínio.
+- **Tupla**: conjunto de pares atributo-valor (uma linha); valores atômicos.
+- **Tabela**: cabeçalho (grau = nº de atributos) e corpo (cardinalidade = nº de
+  tuplas).
+- **Chave primária (PK)**: identifica unicamente uma tupla; **chave estrangeira
+  (FK)**: referencia a PK de outra (ou da mesma) tabela.
+- Integridade: **de entidade (RIE)** e **referencial (RIR)**.
+
+**Mapeamento ER para relacional**: identificadores viram PK; entidade fraca
+recebe a chave da forte como FK; relacionamento n:n sempre vira tabela
+intermediária; relacionamento 1:n incorpora a chave do lado 1 no lado n;
+atributos compostos e multivalorados ganham colunas ou tabela própria.
+
+### 6. Normalização
+
+Quebra tabelas (projeções) para reduzir redundância e inconsistências, ao custo
+de mais junções. Baseada em **dependência funcional** (X determina Y).
+
+- **1FN**: sem atributos multivalorados.
+- **2FN**: nenhum atributo não-chave depende de apenas parte da chave primária.
+- **3FN**: nenhum atributo não-chave depende de outro atributo não-chave.
+
+### 7. Álgebra relacional
+
+Linguagem formal e procedural que fundamenta o SQL. Operadores:
+
+- **Unários**: seleção (σ, filtra tuplas/linhas), projeção (π, escolhe
+  atributos/colunas), renomeação (ρ), atribuição.
+- **Binários**: produto cartesiano, união, diferença, interseção, junção e
+  divisão.
+- **Junções**: theta/condição, natural (iguala atributos de mesmo nome), e
+  externas (left, right, full, que preservam tuplas sem correspondência).
+- **Otimização**: antecipar seleções e projeções (filtrar cedo) e reaproveitar
+  subexpressões comuns.
+
+### 8. SQL: DDL
+
+```sql
+CREATE TABLE alunos (
+  matricula NUMERIC(10),
+  nome      VARCHAR(120),
+  genero    SMALLINT,
+  PRIMARY KEY (matricula)
+);
+
+ALTER TABLE funcionarios ADD COLUMN nroa INT;
+ALTER TABLE funcionarios ADD FOREIGN KEY (nroa) REFERENCES ambulatorios;
+DROP TABLE alunos;
+```
+
+Tipos comuns: `int`, `smallint`, `numeric(p,s)`, `char`, `varchar(n)`, `date`,
+`time`, `timestamp`. `CREATE DATABASE` / `DROP DATABASE` para o banco.
+
+### 9. SQL: DML e consultas
+
+Propriedades **ACID**: Atomicidade (tudo ou nada), Consistência, Isolamento e
+Durabilidade.
+
+```sql
+INSERT INTO medicos (codm, nome, idade) VALUES (4, 'Carlos', 28);
+UPDATE ambulatorios SET capacidade = capacidade + 5 WHERE nroa = 2;
+DELETE FROM medicos WHERE cidade = 'Florianopolis';
+
+SELECT DISTINCT especialidade FROM medicos;
+SELECT AVG(salario) FROM funcionarios WHERE idade > 50;
+```
+
+- Agregação: `COUNT`, `MAX`, `MIN`, `SUM`, `AVG`.
+- Filtros: `LIKE` (`%` e `_`), `IS [NOT] NULL`, `BETWEEN a AND b`, `IN (...)`,
+  `UNION`.
+- Várias tabelas: produto cartesiano (`FROM t1, t2 WHERE ...`) ou **JOIN**
+  (`INNER`, `NATURAL`, `LEFT`, `RIGHT`, `FULL`).
+
+### 10. Consultas avançadas
+
+- **Subconsultas (aninhadas)**: `IN`, `ANY`, `ALL`, comparação com escalar e
+  subconsulta como coluna; úteis para filtragem prévia.
+- **EXISTS / NOT EXISTS**: subconsulta com resultado booleano, avaliada para cada
+  tupla externa.
+- **ORDER BY** (`ASC`/`DESC`), **LIMIT** e **OFFSET**.
+- **GROUP BY** com **HAVING** (filtro sobre grupos, usado com funções de
+  agregação).
+
+```sql
+SELECT especialidade, COUNT(*)
+FROM medicos
+GROUP BY especialidade
+HAVING COUNT(*) > 1;
+```
+
+### 11. Views e índices
+
+- **View**: tabela virtual derivada de uma consulta (`CREATE VIEW nome AS
+  SELECT ...`); faz parte do esquema externo. Nem toda view é atualizável
+  (geralmente só as derivadas de uma única tabela, preservando a PK);
+  `WITH CHECK OPTION` valida inserções pelo predicado. **Views materializadas**
+  guardam o resultado e precisam de `REFRESH MATERIALIZED VIEW`.
+- **Índice**: estrutura que acelera a busca (de O(n) linear para algo melhor).
+  Tipos: simples ou composto; algoritmos B-Tree, Hash, GiST, R-Tree.
+
+```sql
+CREATE [UNIQUE] INDEX esp_med ON medicos (especialidade);
+DROP INDEX esp_med;
+```
+
+### 12. Restrições, funções e gatilhos
+
+- **Restrições (constraints)**: `NOT NULL`, `UNIQUE`, `CHECK` (expressão
+  booleana), definidas na criação ou via `ALTER TABLE ... ADD CONSTRAINT`.
+- **Funções (PL/pgSQL)**: no Postgres, procedures e funções são tratadas de forma
+  semelhante.
+
+```sql
+CREATE OR REPLACE FUNCTION nome(arg tipo)
+RETURNS tipo AS $$
+DECLARE var tipo;
+BEGIN
+  -- operações
+  RETURN var;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+- **Seriais**: códigos automáticos com `SERIAL` ou `CREATE SEQUENCE` +
+  `NEXTVAL`.
+- **Triggers (gatilhos)**: "ouvintes" de eventos `INSERT`/`UPDATE`/`DELETE`/
+  `TRUNCATE`, disparados `BEFORE`, `AFTER` ou `INSTEAD OF`, `FOR EACH ROW` ou
+  `STATEMENT`, com `WHEN (condição)`. Executam uma **trigger function** (que
+  retorna `trigger`) e acessam `NEW`/`OLD` e `TG_OP`. Uso típico: gravar logs de
+  auditoria.
+
+## Dúvidas
+
+- _Revisar: operação de divisão da álgebra; diferença entre ANY/ALL e EXISTS;
+  quando uma view é atualizável._
 
 ## Projetos relacionados
 
-- _A preencher (ex.: relacionar com o Prontuário Eletrônico e o Pet Shop)._
+- Conecta com o [Prontuário Eletrônico](/projetos/academicos/prontuario-eletronico)
+  (stored procedures, triggers, auditoria) e o
+  [Pet Shop](/projetos/academicos/pet-shop) (PostgreSQL).
 
 ## Referências
 
-- _A preencher a partir das indicações do professor._
+- Slides da disciplina (Aulas 1 a 16).
+- Documentação do PostgreSQL: https://www.postgresql.org/docs/
+- ELMASRI, R.; NAVATHE, S. B. *Sistemas de Banco de Dados*.

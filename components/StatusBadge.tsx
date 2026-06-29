@@ -11,31 +11,21 @@ import type { CSSProperties } from 'react'
  * manualmente dentro de um .mdx: `<StatusBadge status="Estudando" />`.
  */
 
-type StatusStyle = { emoji: string; bg: string; fg: string; border: string }
+type StatusStyle = { bg: string; fg: string; border: string }
 
 const STATUS_STYLES: Record<string, StatusStyle> = {
-  // --- Status de estudo ---
-  'A fazer': { emoji: '○', bg: '#3f3f46', fg: '#e4e4e7', border: '#52525b' },
-  Estudando: { emoji: '✦', bg: '#1e3a5f', fg: '#bfdbfe', border: '#3b82f6' },
-  Concluído: { emoji: '✓', bg: '#14532d', fg: '#bbf7d0', border: '#22c55e' },
-  Revisar: { emoji: '↻', bg: '#5c4209', fg: '#fde68a', border: '#f59e0b' },
-  // --- Status de projeto ---
-  'Em andamento': {
-    emoji: '▸',
-    bg: '#312e81',
-    fg: '#c7d2fe',
-    border: '#6366f1'
-  },
-  Pausado: { emoji: '⏸', bg: '#3f3f46', fg: '#d4d4d8', border: '#71717a' },
-  Ideia: { emoji: '💡', bg: '#4a1d52', fg: '#f5d0fe', border: '#c026d3' }
+  // Status de estudo
+  'A fazer': { bg: '#3f3f46', fg: '#e4e4e7', border: '#52525b' },
+  Estudando: { bg: '#1e3a5f', fg: '#bfdbfe', border: '#3b82f6' },
+  Concluído: { bg: '#14532d', fg: '#bbf7d0', border: '#22c55e' },
+  Revisar: { bg: '#5c4209', fg: '#fde68a', border: '#f59e0b' },
+  // Status de projeto
+  'Em andamento': { bg: '#312e81', fg: '#c7d2fe', border: '#6366f1' },
+  Pausado: { bg: '#3f3f46', fg: '#d4d4d8', border: '#71717a' },
+  Ideia: { bg: '#4a1d52', fg: '#f5d0fe', border: '#c026d3' }
 }
 
-const FALLBACK: StatusStyle = {
-  emoji: '•',
-  bg: '#3f3f46',
-  fg: '#e4e4e7',
-  border: '#52525b'
-}
+const FALLBACK: StatusStyle = { bg: '#3f3f46', fg: '#e4e4e7', border: '#52525b' }
 
 export function StatusBadge({ status }: { status: string }) {
   const style = STATUS_STYLES[status] ?? FALLBACK
@@ -43,7 +33,6 @@ export function StatusBadge({ status }: { status: string }) {
   const css: CSSProperties = {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '0.4em',
     padding: '0.2em 0.7em',
     marginTop: '0.5rem',
     borderRadius: '9999px',
@@ -57,7 +46,6 @@ export function StatusBadge({ status }: { status: string }) {
 
   return (
     <span style={css} data-status={status}>
-      <span aria-hidden>{style.emoji}</span>
       {status}
     </span>
   )

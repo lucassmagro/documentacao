@@ -8,17 +8,17 @@ import 'nextra-theme-docs/style.css'
 export const metadata: Metadata = {
   title: {
     default: 'Wiki de Estudos',
-    template: '%s — Wiki de Estudos'
+    template: '%s · Wiki de Estudos'
   },
   description:
     'Wiki pessoal de estudos: faculdade (UNOESC), estudos por conta e projetos.'
 }
 
-const navbar = <Navbar logo={<b>📚 Wiki de Estudos</b>} />
+const navbar = <Navbar logo={<b>Wiki de Estudos</b>} />
 
 const footer = (
   <Footer>
-    {new Date().getFullYear()} © Wiki de Estudos — anotações pessoais.
+    {new Date().getFullYear()} © Wiki de Estudos. Anotações pessoais.
   </Footer>
 )
 
