@@ -1,0 +1,126 @@
+---
+title: Lógica Matemática
+status: Concluído
+codigo: "12270"
+cargaHoraria: 72h
+semestre: 1
+tags: [faculdade, 1-semestre, C, Python]
+gerado: auto
+---
+
+# Lógica Matemática
+
+> 📘 1º semestre · Código 12270 · 72h
+
+<Callout type="aviso" title="Conteúdo gerado automaticamente">
+Este material foi gerado automaticamente como **base de estudo** sobre o tema da
+disciplina, a partir de conhecimento consolidado da área — não corresponde
+necessariamente à ementa, às aulas ou às avaliações da minha turma. Revisar,
+ajustar e personalizar com as minhas anotações.
+</Callout>
+
+## Resumo da matéria
+
+A lógica matemática formaliza o **raciocínio**: como combinar proposições,
+determinar quando um argumento é válido e simplificar expressões. É a base da
+programação (condições, `if`, álgebra booleana), de circuitos digitais e de banco
+de dados (consultas).
+
+## Anotações
+
+### 1. Proposições
+
+**Proposição** é uma sentença declarativa que é **verdadeira (V)** ou **falsa
+(F)**, nunca as duas. "5 é maior que 3" é proposição; "Que horas são?" não é.
+
+- **Simples (atômica):** não contém outra proposição. Ex.: `p: está chovendo`.
+- **Composta (molecular):** formada por proposições ligadas por **conectivos**.
+
+### 2. Conectivos lógicos
+
+| Conectivo | Símbolo | Lê-se | V quando |
+| --- | --- | --- | --- |
+| Negação | ¬p | "não p" | p é F |
+| Conjunção | p ∧ q | "p e q" | ambos V |
+| Disjunção | p ∨ q | "p ou q" | ao menos um V |
+| Condicional | p → q | "se p então q" | falso só se p=V e q=F |
+| Bicondicional | p ↔ q | "p se e somente se q" | p e q têm o mesmo valor |
+
+### 3. Tabelas-verdade
+
+Listam todos os valores possíveis das proposições. Com *n* proposições simples há
+**2ⁿ** linhas.
+
+```text
+ p | q | p ∧ q | p ∨ q | p → q | p ↔ q
+---+---+-------+-------+-------+------
+ V | V |   V   |   V   |   V   |   V
+ V | F |   F   |   V   |   F   |   F
+ F | V |   F   |   V   |   V   |   F
+ F | F |   F   |   F   |   V   |   V
+```
+
+Classificação de uma fórmula:
+
+- **Tautologia:** sempre verdadeira (ex.: `p ∨ ¬p`).
+- **Contradição:** sempre falsa (ex.: `p ∧ ¬p`).
+- **Contingência:** depende dos valores.
+
+### 4. Equivalências e leis
+
+Duas fórmulas são **equivalentes** (≡) quando têm a mesma tabela-verdade.
+Principais leis:
+
+- **Comutativa:** `p ∧ q ≡ q ∧ p`.
+- **Associativa:** `(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)`.
+- **Distributiva:** `p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)`.
+- **De Morgan:** `¬(p ∧ q) ≡ ¬p ∨ ¬q` e `¬(p ∨ q) ≡ ¬p ∧ ¬q`.
+- **Condicional:** `p → q ≡ ¬p ∨ q`.
+
+### 5. Implicação e argumentos
+
+- **Recíproca** de `p → q` é `q → p`.
+- **Contrapositiva** é `¬q → ¬p` (equivalente à original).
+- **Inversa** é `¬p → ¬q`.
+
+Um **argumento** é válido quando, sempre que as premissas são verdadeiras, a
+conclusão também é. Regras de inferência clássicas:
+
+- **Modus Ponens:** de `p → q` e `p`, conclui-se `q`.
+- **Modus Tollens:** de `p → q` e `¬q`, conclui-se `¬p`.
+- **Silogismo Hipotético:** de `p → q` e `q → r`, conclui-se `p → r`.
+
+### 6. Quantificadores
+
+Lógica de predicados estende a proposicional:
+
+- **Universal** `∀x P(x)` — "para todo x, P(x)".
+- **Existencial** `∃x P(x)` — "existe x tal que P(x)".
+
+Negação: `¬(∀x P(x)) ≡ ∃x ¬P(x)` e `¬(∃x P(x)) ≡ ∀x ¬P(x)`.
+
+### 7. Álgebra booleana e conjuntos
+
+A **álgebra booleana** opera com `{0,1}` e os operadores AND (·), OR (+) e NOT (‾) —
+base dos circuitos digitais e mapeável diretamente nos conectivos lógicos.
+
+Noções de **conjuntos**: união (∪), interseção (∩), diferença e complemento têm
+correspondência com OR, AND e NOT (diagramas de Venn ajudam a visualizar).
+
+<Callout type="dica">
+A correspondência lógica ↔ conjuntos ↔ álgebra booleana é o fio condutor:
+`∧`≈`∩`≈`AND`, `∨`≈`∪`≈`OR`, `¬`≈ complemento ≈ `NOT`.
+</Callout>
+
+## Dúvidas
+
+- _Revisar: construção de tabelas-verdade para fórmulas com 3+ variáveis._
+
+## Projetos relacionados
+
+- _Listas de exercícios de tabelas-verdade e validade de argumentos._
+
+## Referências
+
+- ALENCAR FILHO, E. *Iniciação à Lógica Matemática*.
+- GERSTING, J. L. *Fundamentos Matemáticos para a Ciência da Computação*.

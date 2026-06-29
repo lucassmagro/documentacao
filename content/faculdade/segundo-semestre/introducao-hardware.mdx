@@ -1,0 +1,105 @@
+---
+title: Introdução ao Hardware
+status: Concluído
+codigo: "25830"
+cargaHoraria: 36h
+semestre: 2
+tags: [faculdade, 2-semestre]
+gerado: auto
+---
+
+# Introdução ao Hardware
+
+> 📘 2º semestre · Código 25830 · 36h
+
+<Callout type="aviso" title="Conteúdo gerado automaticamente">
+Este material foi gerado automaticamente como **base de estudo** sobre o tema da
+disciplina, a partir de conhecimento consolidado da área — não corresponde
+necessariamente à ementa, às aulas ou às avaliações da minha turma. Revisar,
+ajustar e personalizar com as minhas anotações.
+</Callout>
+
+## Resumo da matéria
+
+Disciplina prática sobre os **componentes físicos** do computador: identificar
+cada peça, entender sua função, montar/desmontar uma máquina e fazer diagnóstico
+básico de problemas. Complementa a Arquitetura de Computadores com o lado
+tangível.
+
+## Anotações
+
+### 1. Componentes principais
+
+- **Gabinete e fonte (PSU):** a fonte converte a energia da tomada (AC) em tensões
+  contínuas (DC) para os componentes; potência medida em watts.
+- **Placa-mãe (motherboard):** integra tudo. Possui **socket** (encaixe da CPU),
+  **slots de memória**, **slots de expansão** (PCIe), conectores SATA/M.2,
+  **chipset** e o firmware **BIOS/UEFI**.
+- **Processador (CPU):** o "cérebro"; refrigerado por cooler (ar) ou water cooler.
+- **Memória RAM:** memória de trabalho, volátil (DDR4/DDR5).
+- **Armazenamento:** **HD** (mecânico, mais lento e barato) e **SSD** (sem partes
+  móveis, muito mais rápido; SATA ou NVMe/M.2).
+- **Placa de vídeo (GPU):** processamento gráfico; pode ser integrada ou dedicada.
+
+### 2. A placa-mãe em detalhe
+
+```text
+[Socket CPU]   [Slots RAM ||||]
+[Chipset]      [PCIe x16 - GPU]
+[Conectores SATA / M.2]   [BIOS/UEFI]
+[Painel traseiro: USB, vídeo, rede, áudio]
+```
+
+- **BIOS/UEFI:** firmware que inicializa o hardware e dá a partida no SO (POST).
+- **Chipset:** coordena a comunicação entre CPU, memória e periféricos.
+
+### 3. Memórias e armazenamento
+
+- **Volátil:** RAM (perde dados ao desligar).
+- **Não volátil:** ROM, SSD, HD.
+- Hierarquia de velocidade: registradores → cache → RAM → SSD → HD (ver
+  Arquitetura de Computadores).
+
+### 4. Periféricos
+
+- **Entrada:** teclado, mouse, scanner, webcam, microfone.
+- **Saída:** monitor, impressora, caixas de som.
+- **Entrada/Saída:** touchscreen, headset, dispositivos de rede.
+- **Interfaces/portas:** USB, HDMI/DisplayPort, Ethernet (RJ-45), áudio P2.
+
+### 5. Montagem de um computador (passos típicos)
+
+1. Instalar a CPU no socket (atenção à orientação) e o cooler.
+2. Encaixar os pentes de RAM nos slots corretos (dual channel).
+3. Fixar a placa-mãe no gabinete.
+4. Instalar armazenamento (SSD/HD) e a GPU (se dedicada).
+5. Conectar a fonte (24 pinos da placa, CPU, SATA, PCIe).
+6. Ligar os cabos do painel frontal (power, LEDs, USB).
+7. Primeira inicialização → acessar a BIOS/UEFI → instalar o SO.
+
+<Callout type="aviso">
+Use **pulseira antiestática** (ou descarregue a estática tocando em metal
+aterrado): a descarga eletrostática (ESD) pode danificar os componentes.
+</Callout>
+
+### 6. Diagnóstico básico
+
+- **Não liga:** verificar fonte, cabo de energia, conexão 24 pinos e do CPU.
+- **Liga mas não dá vídeo:** RAM mal encaixada, GPU, monitor/cabo. Os **bipes do
+  POST** indicam o erro.
+- **Superaquecimento:** limpeza de poeira, pasta térmica, fluxo de ar dos
+  ventiladores.
+- **Lentidão/travamentos:** RAM insuficiente, HD com defeito, malware.
+
+## Dúvidas
+
+- _Revisar: diferenças entre tipos de SSD (SATA x NVMe) e padrões de RAM._
+
+## Projetos relacionados
+
+- _Prática de montagem/desmontagem e diagnóstico em laboratório._
+
+## Referências
+
+- TORRES, G. *Hardware: O Guia Definitivo*.
+- VASCONCELOS, L. *Manual de Manutenção de Micros*.

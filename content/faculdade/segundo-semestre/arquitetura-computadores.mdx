@@ -1,0 +1,130 @@
+---
+title: Arquitetura de Computadores
+status: Concluído
+codigo: "11774"
+cargaHoraria: 72h
+semestre: 2
+tags: [faculdade, 2-semestre]
+gerado: auto
+---
+
+# Arquitetura de Computadores
+
+> 📘 2º semestre · Código 11774 · 72h
+
+<Callout type="aviso" title="Conteúdo gerado automaticamente">
+Este material foi gerado automaticamente como **base de estudo** sobre o tema da
+disciplina, a partir de conhecimento consolidado da área — não corresponde
+necessariamente à ementa, às aulas ou às avaliações da minha turma. Revisar,
+ajustar e personalizar com as minhas anotações.
+</Callout>
+
+## Resumo da matéria
+
+Estuda **como o computador é organizado por dentro** e como ele executa
+instruções: a arquitetura de von Neumann, as partes da CPU, o ciclo de execução,
+a hierarquia de memória, os barramentos e a aritmética binária que sustenta tudo.
+
+## Anotações
+
+### 1. Arquitetura de von Neumann
+
+Modelo em que **dados e instruções** ficam na **mesma memória**. Componentes:
+
+- **CPU** (processador) — executa as instruções.
+- **Memória principal** — guarda programa e dados.
+- **Dispositivos de E/S** — comunicação com o exterior.
+- **Barramentos** — conectam tudo.
+
+Característica: o **gargalo de von Neumann** — a CPU e a memória disputam o mesmo
+barramento, limitando a velocidade. A arquitetura **Harvard** separa memória de
+dados e de instruções (comum em microcontroladores).
+
+### 2. CPU por dentro
+
+- **ULA (Unidade Lógica e Aritmética):** faz operações aritméticas e lógicas.
+- **Unidade de Controle (UC):** busca, decodifica e coordena a execução das
+  instruções.
+- **Registradores:** memória ultrarrápida interna. Especiais: **PC** (Program
+  Counter, aponta a próxima instrução), **IR** (Instruction Register), **MAR/MBR**
+  (endereço/dado de memória), **acumulador**.
+- **Clock:** sinal que sincroniza as operações; frequência medida em GHz.
+
+### 3. Ciclo de instrução (busca-decodifica-executa)
+
+```text
+1. BUSCA (fetch)      → UC lê a instrução apontada pelo PC
+2. DECODIFICA (decode)→ identifica a operação e os operandos
+3. EXECUTA (execute)  → ULA/registradores realizam a operação
+4. (escreve resultado e incrementa o PC) → repete
+```
+
+**Pipeline:** executar etapas de instruções diferentes em paralelo (como uma
+linha de montagem) para aumentar o desempenho.
+
+### 4. Hierarquia de memória
+
+Quanto mais perto da CPU, mais rápida, mais cara e menor:
+
+```text
+Registradores  (mais rápido, menor)
+   Cache (L1, L2, L3)
+      Memória RAM
+         SSD / HD (armazenamento)
+            Fita / nuvem  (mais lento, maior)
+```
+
+- **RAM:** volátil (perde o conteúdo ao desligar), acesso aleatório.
+- **ROM:** somente leitura, não volátil (firmware).
+- **Cache:** guarda dados usados com frequência; explora **localidade** temporal
+  e espacial.
+
+### 5. Barramentos
+
+Caminhos que transportam informação:
+
+- **Barramento de dados** — transfere os dados.
+- **Barramento de endereços** — indica a posição de memória.
+- **Barramento de controle** — sinais de coordenação (leitura/escrita).
+
+### 6. Representação numérica e aritmética binária
+
+- **Sem sinal:** apenas valores positivos.
+- **Com sinal:** **complemento de dois** é o padrão (facilita soma/subtração e
+  tem um único zero).
+
+Soma binária (vai-um / "carry"):
+
+```text
+  0 1 0 1   (5)
++ 0 0 1 1   (3)
+---------
+  1 0 0 0   (8)
+```
+
+Para subtrair `A - B`, soma-se `A` ao complemento de dois de `B`. **Overflow**
+ocorre quando o resultado não cabe no número de bits disponível.
+
+### 7. CISC vs RISC
+
+- **CISC** (ex.: x86): muitas instruções complexas.
+- **RISC** (ex.: ARM): poucas instruções simples e rápidas, favorece pipeline.
+
+<Callout type="dica">
+Reforce a base de **conversão de bases** e **complemento de dois** — eles
+aparecem aqui o tempo todo e vêm de Princípios da Computação.
+</Callout>
+
+## Dúvidas
+
+- _Revisar: pipeline e cálculo de overflow em complemento de dois._
+
+## Projetos relacionados
+
+- _Exercícios de aritmética binária e simulações de ciclo de instrução._
+
+## Referências
+
+- TANENBAUM, A. S. *Organização Estruturada de Computadores*.
+- STALLINGS, W. *Arquitetura e Organização de Computadores*.
+- PATTERSON, D.; HENNESSY, J. *Organização e Projeto de Computadores*.

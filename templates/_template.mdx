@@ -1,0 +1,47 @@
+---
+# ===========================================================================
+# TEMPLATE DE PÁGINA — copie este arquivo para content/<onde-quiser>/<slug>.mdx
+# ===========================================================================
+# Campos do frontmatter:
+title: Título da página           # vai no menu, na aba do navegador e no índice
+status: Estudando                 # A fazer | Estudando | Concluído | Revisar
+#                                 # (projetos: Em andamento | Concluído | Pausado | Ideia)
+#                                 # O badge aparece sozinho no topo a partir deste campo.
+date: 2026-06-28                  # opcional — data de criação/atualização
+tags: [exemplo, rascunho]         # opcional — aparecem no Painel
+# fonte: curso.dev                # opcional — origem da anotação (ex: importações)
+---
+
+# Título da página
+
+> Uma linha de contexto sobre esta página.
+
+## Resumo
+
+_O essencial em poucas linhas._
+
+## Anotações
+
+_Conteúdo principal. Você pode usar os componentes prontos:_
+
+<Callout type="dica" title="Dica">
+Use `<Callout type="nota | info | dica | aviso | erro">` para destaques.
+</Callout>
+
+```ts
+// Blocos de código com crase tripla já têm syntax highlight (Shiki).
+const ola = 'mundo'
+```
+
+<CodeBlock language="bash" title="terminal">
+# Use <CodeBlock> quando quiser um cabeçalho com a linguagem/arquivo.
+npm run dev
+</CodeBlock>
+
+## Dúvidas
+
+- _O que ainda não entendi / quero revisar._
+
+## Referências
+
+- _Links, livros, vídeos._

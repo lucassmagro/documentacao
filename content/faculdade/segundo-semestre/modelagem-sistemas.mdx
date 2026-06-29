@@ -1,0 +1,129 @@
+---
+title: Modelagem de Sistemas
+status: Concluído
+codigo: "28209"
+cargaHoraria: 72h
+semestre: 2
+tags: [faculdade, 2-semestre]
+gerado: auto
+---
+
+# Modelagem de Sistemas
+
+> 📘 2º semestre · Código 28209 · 72h
+
+<Callout type="aviso" title="Conteúdo gerado automaticamente">
+Este material foi gerado automaticamente como **base de estudo** sobre o tema da
+disciplina, a partir de conhecimento consolidado da área — não corresponde
+necessariamente à ementa, às aulas ou às avaliações da minha turma. Revisar,
+ajustar e personalizar com as minhas anotações.
+</Callout>
+
+## Resumo da matéria
+
+Foca em **análise e projeto orientado a objetos (OO)** e na linguagem **UML**
+para representar visualmente um sistema antes (e durante) sua construção. Modelar
+reduz ambiguidade, comunica o projeto e antecipa problemas.
+
+## Anotações
+
+### 1. Paradigma orientado a objetos
+
+O mundo é modelado como **objetos** que têm **atributos** (dados) e **métodos**
+(comportamento). Pilares:
+
+- **Abstração:** representar só o que importa do problema.
+- **Encapsulamento:** esconder detalhes internos; expor uma interface.
+- **Herança:** uma classe reaproveita/estende outra.
+- **Polimorfismo:** o mesmo método se comporta diferente conforme o objeto.
+
+**Classe** é o molde; **objeto** é a instância concreta.
+
+### 2. UML — visão geral
+
+A **UML (Unified Modeling Language)** é a notação padrão para modelar sistemas
+OO. Seus diagramas dividem-se em **estruturais** (estado estático) e
+**comportamentais** (dinâmica).
+
+### 3. Diagrama de Casos de Uso
+
+Mostra **o que** o sistema faz do ponto de vista do usuário.
+
+- **Ator:** quem interage (usuário, outro sistema).
+- **Caso de uso:** uma funcionalidade (elipse).
+- **Relações:** `include` (sempre executa), `extend` (opcional), generalização.
+
+```text
+( Cliente ) ---- (Fazer pedido) ----<<include>>---- (Autenticar)
+```
+
+### 4. Diagrama de Classes
+
+O mais importante dos estruturais. Cada classe tem **nome**, **atributos** e
+**métodos**, com visibilidade: `+` público, `-` privado, `#` protegido.
+
+```text
++-------------------+
+|      Pedido       |
++-------------------+
+| - id: int         |
+| - data: Date      |
++-------------------+
+| + calcularTotal() |
++-------------------+
+```
+
+**Relacionamentos:**
+
+- **Associação:** ligação entre classes (com **multiplicidade** 1, *, 1..*).
+- **Agregação:** "todo-parte" fraca (a parte sobrevive ao todo) — losango vazado.
+- **Composição:** "todo-parte" forte (a parte morre com o todo) — losango cheio.
+- **Herança/generalização:** seta com triângulo vazado.
+- **Dependência:** uma classe usa outra temporariamente.
+
+### 5. Diagrama de Sequência
+
+Comportamental: mostra a **troca de mensagens entre objetos ao longo do tempo**
+para realizar um caso de uso. Tem **linhas de vida** (verticais) e mensagens
+(setas horizontais na ordem temporal).
+
+### 6. Diagrama de Atividades
+
+Representa o **fluxo de trabalho** (parecido com fluxograma), com nó inicial,
+ações, decisões (losango), bifurcação/junção paralela e nó final. Útil para
+detalhar a lógica de um caso de uso.
+
+### 7. Outros diagramas úteis
+
+- **Estados (máquina de estados):** os estados de um objeto e as transições.
+- **Componentes** e **Implantação (deployment):** organização física/lógica do
+  software.
+
+### 8. Processo de análise e projeto
+
+```text
+Requisitos → Análise (casos de uso, classes de domínio)
+          → Projeto (classes detalhadas, sequência)
+          → Implementação
+```
+
+<Callout type="dica">
+Conecta com **Modelagem de Processos** (1º sem) e prepara o terreno para
+**Engenharia de Software** (3º sem): casos de uso saem dos requisitos.
+</Callout>
+
+## Dúvidas
+
+- _Revisar: diferença entre agregação e composição; quando usar `include` vs
+  `extend`._
+
+## Projetos relacionados
+
+- _Modelos UML de sistemas estudados na disciplina._
+- Relacionado: [Sistema de gestão de Pet Shop](/projetos/academicos/pet-shop).
+
+## Referências
+
+- BOOCH, G.; RUMBAUGH, J.; JACOBSON, I. *UML — Guia do Usuário*.
+- LARMAN, C. *Utilizando UML e Padrões*.
+- FOWLER, M. *UML Essencial*.

@@ -1,0 +1,248 @@
+---
+title: Algoritmos e Lógica de Programação
+status: Concluído
+codigo: "11008"
+cargaHoraria: 72h
+semestre: 1
+tags: [faculdade, 1-semestre, C, Python]
+gerado: auto
+---
+
+# Algoritmos e Lógica de Programação
+
+> 📘 1º semestre · Código 11008 · 72h
+
+<Callout type="aviso" title="Conteúdo gerado automaticamente">
+Este material foi gerado automaticamente como **base de estudo** sobre o tema da
+disciplina, a partir de conhecimento consolidado da área — não corresponde
+necessariamente à ementa, às aulas ou às avaliações da minha turma. Revisar,
+ajustar e personalizar com as minhas anotações.
+</Callout>
+
+## Resumo da matéria
+
+Algoritmos e Lógica de Programação é a base de todo o curso. A ideia central é
+aprender a **decompor um problema** em passos bem definidos (um algoritmo) e
+depois expressar esses passos em uma linguagem de programação. Aqui o foco está
+na **lógica** — sequência, decisão e repetição — e nas estruturas fundamentais
+que se repetem em qualquer linguagem.
+
+Esta disciplina usou **C** (linguagem compilada, próxima da máquina, ótima para
+entender memória e ponteiros) e **Python** (linguagem interpretada, de sintaxe
+enxuta, ótima para focar na lógica sem ruído). Os exemplos abaixo mostram os dois
+lado a lado quando ajuda a comparar.
+
+## Anotações
+
+### 1. O que é um algoritmo
+
+Um algoritmo é uma sequência **finita** e **não ambígua** de passos para resolver
+um problema. Três propriedades importantes:
+
+- **Finitude** — termina após um número finito de passos.
+- **Determinismo** — cada passo é claramente definido.
+- **Entrada/Saída** — recebe dados e produz um resultado.
+
+Antes de codificar, é comum descrever a lógica em **pseudocódigo** ou
+**fluxograma**. Toda lógica se reduz a três estruturas: **sequência**,
+**decisão** e **repetição**.
+
+### 2. Variáveis e tipos de dados
+
+Uma variável é um espaço nomeado na memória que guarda um valor. Tipos básicos:
+inteiro, real (ponto flutuante), caractere, booleano e texto (string).
+
+```c
+// C — tipagem estática (o tipo é declarado)
+#include <stdio.h>
+int main() {
+    int idade = 25;
+    float altura = 1.78;
+    char inicial = 'L';
+    printf("%d %.2f %c\n", idade, altura, inicial);
+    return 0;
+}
+```
+
+```python
+# Python — tipagem dinâmica (o tipo é inferido)
+idade = 25
+altura = 1.78
+inicial = "L"
+print(idade, altura, inicial)
+```
+
+Em C o tipo é fixo e o tamanho na memória é conhecido; em Python a variável é só
+um nome que aponta para um objeto, e o tipo pode mudar ao longo do programa.
+
+### 3. Operadores
+
+- **Aritméticos:** `+`, `-`, `*`, `/`, `%` (resto), e em C `/` entre inteiros é
+  divisão inteira. Em Python `//` é divisão inteira e `/` sempre dá float.
+- **Relacionais:** `==`, `!=`, `>`, `<`, `>=`, `<=` (resultam em verdadeiro/falso).
+- **Lógicos:** em C `&&`, `||`, `!`; em Python `and`, `or`, `not`.
+
+### 4. Entrada e saída
+
+```c
+int n;
+printf("Digite um numero: ");
+scanf("%d", &n);          // &n = endereço onde guardar
+printf("Voce digitou %d\n", n);
+```
+
+```python
+n = int(input("Digite um numero: "))
+print("Voce digitou", n)
+```
+
+### 5. Estruturas condicionais (decisão)
+
+```c
+if (nota >= 7.0) {
+    printf("Aprovado\n");
+} else if (nota >= 5.0) {
+    printf("Recuperacao\n");
+} else {
+    printf("Reprovado\n");
+}
+```
+
+```python
+if nota >= 7.0:
+    print("Aprovado")
+elif nota >= 5.0:
+    print("Recuperacao")
+else:
+    print("Reprovado")
+```
+
+C também tem o `switch` para comparar um valor contra várias opções fixas.
+
+### 6. Laços de repetição
+
+- **`while`** — repete enquanto a condição for verdadeira (teste no início).
+- **`do...while`** (só em C) — executa ao menos uma vez (teste no fim).
+- **`for`** — laço contado, ideal quando se sabe o número de repetições.
+
+```c
+for (int i = 1; i <= 5; i++) {
+    printf("%d ", i);   // 1 2 3 4 5
+}
+```
+
+```python
+for i in range(1, 6):
+    print(i, end=" ")   # 1 2 3 4 5
+```
+
+<Callout type="dica">
+Cuidado com **laço infinito**: sempre garanta que a condição de parada será
+atingida (a variável de controle precisa mudar dentro do laço).
+</Callout>
+
+### 7. Funções
+
+Funções organizam o código em blocos reutilizáveis, recebem **parâmetros** e
+podem **retornar** um valor.
+
+```c
+int soma(int a, int b) {
+    return a + b;
+}
+// uso: int r = soma(3, 4);
+```
+
+```python
+def soma(a, b):
+    return a + b
+# uso: r = soma(3, 4)
+```
+
+Conceitos relacionados: **escopo** (variável local vs global) e **passagem de
+parâmetros** (por valor — uma cópia; por referência — o próprio dado).
+
+### 8. Vetores (arrays) e matrizes
+
+Um vetor guarda vários valores do mesmo tipo sob um nome, acessados por índice
+(começando em 0). Matriz é um vetor de duas dimensões (linhas × colunas).
+
+```c
+int v[5] = {10, 20, 30, 40, 50};
+printf("%d\n", v[2]);        // 30
+int m[2][3] = {{1,2,3},{4,5,6}};
+```
+
+```python
+v = [10, 20, 30, 40, 50]
+print(v[2])                  # 30
+m = [[1, 2, 3], [4, 5, 6]]
+```
+
+### 9. Strings
+
+String é uma sequência de caracteres. Em C, é um vetor de `char` terminado pelo
+caractere nulo `'\0'`, manipulado pela biblioteca `<string.h>` (`strlen`,
+`strcpy`, `strcmp`). Em Python, strings são um tipo nativo, imutável e cheio de
+métodos (`.upper()`, `.split()`, fatiamento `s[1:3]`).
+
+```c
+#include <string.h>
+char nome[20] = "Lucas";
+printf("%lu\n", strlen(nome));  // 5
+```
+
+```python
+nome = "Lucas"
+print(len(nome))                # 5
+print(nome.upper())             # LUCAS
+```
+
+### 10. Ponteiros (em C)
+
+Um ponteiro guarda o **endereço de memória** de outra variável. É o que permite
+passagem por referência, alocação dinâmica e manipulação eficiente de vetores.
+
+```c
+int x = 10;
+int *p = &x;     // p recebe o endereço de x
+printf("%d\n", *p);   // 10  (*p = "valor apontado por p")
+*p = 20;              // altera x através do ponteiro
+printf("%d\n", x);    // 20
+```
+
+Python não expõe ponteiros diretamente, mas o modelo de "nomes que referenciam
+objetos" tem ideia parecida para tipos mutáveis (listas, dicionários).
+
+### 11. Introdução à recursão
+
+Uma função **recursiva** chama a si mesma para resolver um subproblema menor.
+Precisa de um **caso base** (que para a recursão) e um **passo recursivo**.
+
+```c
+int fatorial(int n) {
+    if (n <= 1) return 1;        // caso base
+    return n * fatorial(n - 1);  // passo recursivo
+}
+```
+
+```python
+def fatorial(n):
+    if n <= 1:
+        return 1
+    return n * fatorial(n - 1)
+```
+
+## Dúvidas
+
+- _O que ainda quero revisar (ex: aritmética de ponteiros, recursão com vetores)._
+
+## Projetos relacionados
+
+- _Exercícios e pequenos programas em C/Python feitos na disciplina._
+
+## Referências
+
+- FORBELLONE, A. L. V.; EBERSPÄCHER, H. F. *Lógica de Programação*.
+- Documentação oficial do Python — https://docs.python.org/pt-br/3/
+- *The C Programming Language* (Kernighan & Ritchie).

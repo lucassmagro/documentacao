@@ -1,0 +1,179 @@
+---
+title: Fundamentos ao Desenvolvimento Web
+status: Concluído
+codigo: "32693"
+cargaHoraria: 72h
+semestre: 2
+tags: [faculdade, 2-semestre]
+gerado: auto
+---
+
+# Fundamentos ao Desenvolvimento Web
+
+> 📘 2º semestre · Código 32693 · 72h
+
+<Callout type="aviso" title="Conteúdo gerado automaticamente">
+Este material foi gerado automaticamente como **base de estudo** sobre o tema da
+disciplina, a partir de conhecimento consolidado da área — não corresponde
+necessariamente à ementa, às aulas ou às avaliações da minha turma. Revisar,
+ajustar e personalizar com as minhas anotações.
+</Callout>
+
+## Resumo da matéria
+
+Introdução à construção de páginas para a web com o trio fundamental:
+**HTML** (estrutura), **CSS** (apresentação) e **JavaScript** (comportamento).
+Antes disso, é preciso entender **como a web funciona** — o modelo
+cliente-servidor e o protocolo HTTP.
+
+## Anotações
+
+### 1. Como a web funciona
+
+A web segue o modelo **cliente-servidor**: o **cliente** (navegador) faz uma
+**requisição** e o **servidor** devolve uma **resposta**.
+
+- **URL** identifica o recurso (`https://site.com/pagina`).
+- **DNS** traduz o domínio em um endereço IP.
+- **HTTP/HTTPS** é o protocolo da conversa. HTTPS é o HTTP sobre TLS
+  (criptografado).
+- **Métodos HTTP:** `GET` (buscar), `POST` (enviar/criar), `PUT`/`PATCH`
+  (atualizar), `DELETE` (remover).
+- **Status:** `200` OK, `301/302` redirecionamento, `404` não encontrado,
+  `500` erro do servidor.
+
+```text
+Navegador  --- GET /index.html --->  Servidor
+Navegador  <-- 200 OK + HTML -------  Servidor
+```
+
+### 2. HTML semântico
+
+HTML (HyperText Markup Language) estrutura o conteúdo com **tags**. Usar tags
+**semânticas** (que descrevem o significado) melhora acessibilidade e SEO.
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Minha página</title>
+  </head>
+  <body>
+    <header><h1>Título</h1></header>
+    <nav><!-- menu --></nav>
+    <main>
+      <article>
+        <h2>Seção</h2>
+        <p>Um parágrafo com <a href="#">link</a>.</p>
+      </article>
+    </main>
+    <footer>Rodapé</footer>
+  </body>
+</html>
+```
+
+Tags semânticas comuns: `header`, `nav`, `main`, `section`, `article`, `aside`,
+`footer`, `figure`. Evite usar `div` para tudo.
+
+### 3. CSS — seletores
+
+CSS (Cascading Style Sheets) define a aparência. Regra = **seletor** + **bloco de
+declarações**.
+
+```css
+/* seletor por tag */     p   { color: #333; }
+/* por classe */          .botao { background: #06f; }
+/* por id */              #topo { height: 80px; }
+/* descendente */         nav a { text-decoration: none; }
+```
+
+Especificidade (quem "ganha"): id > classe > tag. O "C" de Cascading vem da
+cascata de regras que se sobrepõem.
+
+### 4. Box model
+
+Todo elemento é uma caixa: **content → padding → border → margin**.
+
+```css
+.card {
+  width: 300px;
+  padding: 16px;          /* espaço interno */
+  border: 1px solid #ccc;
+  margin: 8px;            /* espaço externo */
+  box-sizing: border-box; /* largura inclui padding e border */
+}
+```
+
+### 5. Layout com Flexbox e Grid
+
+**Flexbox** (uma dimensão — linha OU coluna):
+
+```css
+.menu {
+  display: flex;
+  justify-content: space-between; /* eixo principal */
+  align-items: center;            /* eixo cruzado */
+  gap: 16px;
+}
+```
+
+**Grid** (duas dimensões — linhas E colunas):
+
+```css
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+```
+
+Para **responsividade**, use **media queries**:
+
+```css
+@media (max-width: 600px) {
+  .galeria { grid-template-columns: 1fr; }
+}
+```
+
+### 6. Introdução ao JavaScript
+
+JavaScript adiciona **comportamento** e interatividade. Roda no navegador e
+manipula a página via **DOM (Document Object Model)**.
+
+```html
+<button id="btn">Clique</button>
+<p id="saida"></p>
+
+<script>
+  const btn = document.getElementById("btn");
+  let contador = 0;
+  btn.addEventListener("click", () => {
+    contador++;
+    document.getElementById("saida").textContent = `Cliques: ${contador}`;
+  });
+</script>
+```
+
+Fundamentos da linguagem: variáveis (`let`, `const`), tipos, funções,
+condicionais e laços (iguais à lógica de programação), arrays e objetos, e
+**eventos** para reagir às ações do usuário.
+
+<Callout type="dica">
+Regra de ouro: **HTML** para conteúdo, **CSS** para estilo, **JS** para
+comportamento. Manter as três camadas separadas deixa o código mais limpo.
+</Callout>
+
+## Dúvidas
+
+- _Revisar: diferença entre Flexbox e Grid; manipulação de DOM._
+
+## Projetos relacionados
+
+- _Páginas e pequenos sites estáticos construídos na disciplina._
+- Relacionado: [Criação de sites / Freelance](/estudos-por-conta/criacao-de-sites).
+
+## Referências
+
+- MDN Web Docs — https://developer.mozilla.org/pt-BR/
+- DUCKETT, J. *HTML & CSS: Design and Build Websites*.

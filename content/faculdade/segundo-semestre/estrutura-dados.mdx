@@ -1,0 +1,166 @@
+---
+title: Estrutura de Dados
+status: Concluído
+codigo: "10270"
+cargaHoraria: 72h
+semestre: 2
+tags: [faculdade, 2-semestre]
+gerado: auto
+---
+
+# Estrutura de Dados
+
+> 📘 2º semestre · Código 10270 · 72h
+
+<Callout type="aviso" title="Conteúdo gerado automaticamente">
+Este material foi gerado automaticamente como **base de estudo** sobre o tema da
+disciplina, a partir de conhecimento consolidado da área — não corresponde
+necessariamente à ementa, às aulas ou às avaliações da minha turma. Revisar,
+ajustar e personalizar com as minhas anotações.
+</Callout>
+
+## Resumo da matéria
+
+Estruturas de dados são formas de **organizar dados na memória** para que as
+operações (inserir, buscar, remover) sejam eficientes. A disciplina cobre as
+estruturas clássicas, a análise de eficiência (Big-O) e os algoritmos de busca e
+ordenação. É um dos pilares para programar bem.
+
+## Anotações
+
+### 1. Complexidade de algoritmos (Big-O)
+
+A notação **Big-O** descreve como o tempo (ou memória) cresce conforme o tamanho
+da entrada *n*, no **pior caso**. Da mais rápida à mais lenta:
+
+| Notação | Nome | Exemplo |
+| --- | --- | --- |
+| O(1) | constante | acessar `v[i]` |
+| O(log n) | logarítmica | busca binária |
+| O(n) | linear | percorrer uma lista |
+| O(n log n) | linearítmica | merge sort, quicksort (médio) |
+| O(n²) | quadrática | bubble sort, laços aninhados |
+
+A ideia é **comparar algoritmos** independentemente da máquina.
+
+### 2. Vetores (arrays)
+
+Memória contígua, acesso por índice em **O(1)**. Limitação: tamanho fixo e
+inserir/remover no meio é **O(n)** (precisa deslocar elementos).
+
+### 3. Listas encadeadas
+
+Cada **nó** guarda um dado e um **ponteiro** para o próximo. Tamanho dinâmico;
+inserir/remover é O(1) se já se tem o ponteiro, mas o acesso é O(n).
+
+```c
+struct No {
+    int dado;
+    struct No *prox;
+};
+
+// inserir no início
+struct No* inserir_inicio(struct No *cabeca, int valor) {
+    struct No *novo = malloc(sizeof(struct No));
+    novo->dado = valor;
+    novo->prox = cabeca;
+    return novo;   // novo passa a ser a cabeça
+}
+```
+
+- **Simplesmente encadeada:** só aponta para o próximo.
+- **Duplamente encadeada:** aponta para o próximo **e** o anterior (navega nos dois
+  sentidos).
+- **Circular:** o último nó aponta de volta para o primeiro.
+
+### 4. Pilhas (Stack) — LIFO
+
+Último a entrar, primeiro a sair (**L**ast **I**n **F**irst **O**ut). Operações:
+`push` (empilha), `pop` (desempilha), `top` (topo). Usos: desfazer (undo), pilha
+de chamadas de funções, avaliação de expressões.
+
+```text
+push(1) push(2) push(3)   →  topo: [3][2][1]
+pop() devolve 3           →  topo: [2][1]
+```
+
+### 5. Filas (Queue) — FIFO
+
+Primeiro a entrar, primeiro a sair (**F**irst **I**n **F**irst **O**ut).
+Operações: `enqueue` (insere no fim), `dequeue` (remove do início). Usos:
+impressão, atendimento, buffers. Variante: **fila circular** e **fila de
+prioridade**.
+
+### 6. Árvores
+
+Estrutura hierárquica: um **nó raiz**, **filhos** e **folhas**.
+
+- **Árvore binária:** cada nó tem no máximo 2 filhos.
+- **Árvore Binária de Busca (BST):** à esquerda valores menores, à direita
+  maiores → busca em **O(log n)** quando balanceada.
+
+```text
+        8
+       / \
+      3   10
+     / \    \
+    1   6    14
+```
+
+**Percursos:** em-ordem (esq, raiz, dir → dá os valores ordenados), pré-ordem
+(raiz primeiro), pós-ordem (raiz por último). Árvores balanceadas (AVL,
+rubro-negra) mantêm a eficiência.
+
+### 7. Grafos (noção)
+
+Conjunto de **vértices** ligados por **arestas**. Podem ser direcionados ou não,
+com ou sem peso. Representação por **matriz de adjacência** ou **lista de
+adjacência**. Percursos: **busca em largura (BFS)** e **busca em profundidade
+(DFS)**. Modelam redes, mapas, relações.
+
+### 8. Algoritmos de busca
+
+- **Busca linear:** percorre tudo — O(n).
+- **Busca binária:** divide ao meio a cada passo; exige vetor **ordenado** —
+  O(log n).
+
+### 9. Algoritmos de ordenação
+
+| Algoritmo | Tempo médio | Ideia |
+| --- | --- | --- |
+| Bubble sort | O(n²) | troca vizinhos fora de ordem |
+| Selection sort | O(n²) | seleciona o menor a cada passo |
+| Insertion sort | O(n²) | insere cada elemento na posição certa |
+| Merge sort | O(n log n) | divide e conquista, intercala |
+| Quicksort | O(n log n) | particiona em torno de um pivô |
+
+```c
+// Bubble sort
+void bubble(int v[], int n) {
+    for (int i = 0; i < n - 1; i++)
+        for (int j = 0; j < n - 1 - i; j++)
+            if (v[j] > v[j + 1]) {
+                int tmp = v[j]; v[j] = v[j + 1]; v[j + 1] = tmp;
+            }
+}
+```
+
+<Callout type="dica">
+Escolha a estrutura pela operação mais frequente: muitos acessos por índice →
+vetor; muitas inserções/remoções → lista; ordem LIFO/FIFO → pilha/fila; busca
+ordenada → árvore.
+</Callout>
+
+## Dúvidas
+
+- _Revisar: balanceamento de árvores (AVL) e implementação de quicksort._
+
+## Projetos relacionados
+
+- _Implementações de listas, pilhas, filas e árvores em C._
+
+## Referências
+
+- CORMEN, T. H. *Algoritmos: Teoria e Prática*.
+- ASCENCIO, A. F. G.; ARAÚJO, G. S. *Estruturas de Dados*.
+- ZIVIANI, N. *Projeto de Algoritmos*.

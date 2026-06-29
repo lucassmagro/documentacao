@@ -1,0 +1,122 @@
+---
+title: Modelagem de Processos e Sistemas de Informação
+status: Concluído
+codigo: "36845"
+cargaHoraria: 72h
+semestre: 1
+tags: [faculdade, 1-semestre, C, Python]
+gerado: auto
+---
+
+# Modelagem de Processos e Sistemas de Informação
+
+> 📘 1º semestre · Código 36845 · 72h
+
+<Callout type="aviso" title="Conteúdo gerado automaticamente">
+Este material foi gerado automaticamente como **base de estudo** sobre o tema da
+disciplina, a partir de conhecimento consolidado da área — não corresponde
+necessariamente à ementa, às aulas ou às avaliações da minha turma. Revisar,
+ajustar e personalizar com as minhas anotações.
+</Callout>
+
+## Resumo da matéria
+
+A disciplina conecta a **organização** e a **TI**: o que é um processo de negócio,
+como representá-lo graficamente com **BPMN**, e como os **Sistemas de Informação**
+apoiam os diferentes níveis de uma empresa. É a ponte entre "o negócio" e "o
+sistema" que será construído.
+
+## Anotações
+
+### 1. Processo de negócio
+
+Um **processo** é um conjunto de atividades coordenadas que transformam entradas
+em saídas com valor para um cliente. Ex.: o processo "vender" vai do pedido até a
+entrega e o recebimento.
+
+Elementos: **entradas**, **atividades/tarefas**, **regras**, **papéis/atores**,
+**saídas** e **indicadores** (para medir desempenho). Gerir processos
+(**BPM — Business Process Management**) é o ciclo de mapear → analisar →
+redesenhar → automatizar → monitorar.
+
+### 2. Notação BPMN
+
+**BPMN (Business Process Model and Notation)** é o padrão para desenhar
+processos. Elementos principais:
+
+- **Eventos** (círculos): início, intermediário, fim.
+- **Atividades/Tarefas** (retângulos arredondados): o trabalho realizado.
+- **Gateways** (losangos): decisões e desvios de fluxo (exclusivo "ou",
+  paralelo "e").
+- **Fluxos de sequência** (setas): a ordem das atividades.
+- **Piscinas (pools) e raias (lanes):** quem é responsável por cada parte
+  (departamento, sistema, pessoa).
+- **Artefatos:** objetos de dados, anotações.
+
+```text
+(início) → [Receber pedido] → <Estoque ok?> --não--> [Avisar cliente] → (fim)
+                                     |sim
+                                     v
+                              [Separar produto] → [Enviar] → (fim)
+```
+
+<Callout type="dica">
+Boa prática: cada raia ("lane") representa um responsável; assim o diagrama deixa
+claro **quem** faz **o quê** e onde estão os gargalos.
+</Callout>
+
+### 3. Conceito de Sistema de Informação (SI)
+
+Um SI é um conjunto de componentes inter-relacionados que **coletam, processam,
+armazenam e distribuem informação** para apoiar decisões e o controle de uma
+organização. Componentes: **pessoas**, **processos**, **tecnologia** (hardware,
+software, dados) e **rede**.
+
+Dado → Informação → Conhecimento: dados são fatos brutos; informação é dado com
+contexto/significado; conhecimento é informação aplicada à tomada de decisão.
+
+### 4. Tipos de Sistemas de Informação
+
+Os SI atendem a níveis organizacionais diferentes:
+
+- **SPT — Sistema de Processamento de Transações** (nível operacional): registra
+  as operações do dia a dia (vendas, folha de pagamento).
+- **SIG — Sistema de Informação Gerencial** (nível tático): consolida dados do SPT
+  em relatórios para gerentes.
+- **SAD — Sistema de Apoio à Decisão** (nível tático/estratégico): análises e
+  simulações para decisões semiestruturadas.
+- **SIE / SAE — Sistema de Informação Executiva** (nível estratégico): visão
+  consolidada para a alta direção (dashboards, indicadores).
+
+Sistemas integradores: **ERP** (integra os processos internos), **CRM**
+(relacionamento com clientes), **SCM** (cadeia de suprimentos).
+
+### 5. Pirâmide organizacional e o papel do SI
+
+```text
+        /\
+       /  \   Estratégico  → SIE/SAD
+      /----\
+     /      \  Tático       → SIG/SAD
+    /--------\
+   /          \ Operacional → SPT
+  /____________\
+```
+
+O SI cria **vantagem competitiva** ao tornar processos mais eficientes, apoiar
+decisões com dados e habilitar novos modelos de negócio.
+
+## Dúvidas
+
+- _Revisar: diferença prática entre SIG e SAD; modelar um processo completo em
+  BPMN._
+
+## Projetos relacionados
+
+- _Diagramas BPMN de processos reais e estudos de caso de SI._
+
+## Referências
+
+- LAUDON, K. C.; LAUDON, J. P. *Sistemas de Informação Gerenciais*.
+- OMG. *BPMN 2.0 Specification*.
+- O'BRIEN, J. A. *Sistemas de Informação e as Decisões Gerenciais*.
